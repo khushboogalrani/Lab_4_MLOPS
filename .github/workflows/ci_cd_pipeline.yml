@@ -10,7 +10,7 @@ on:
   workflow_dispatch: 
 
 env:
-  REGION: us
+  REGION: us-east4
   REPOSITORY_NAME: my-repo
 
 jobs:
