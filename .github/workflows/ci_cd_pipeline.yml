@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: Labs/Github_Labs/Lab4/
+        working-directory: Lab_4_MLOPS/
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -32,7 +32,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/Labs/Github_Labs/Lab4/requirements.txt') }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('**Lab_4_MLOPS/requirements.txt') }}
 
       - name: Install dependencies
         run: |
@@ -49,7 +49,7 @@ jobs:
       - name: Authenticate with GCP
         uses: google-github-actions/auth@v2
         with:
-          credentials_json: ${{ secrets.GCP_SA_KEY2 }}
+          credentials_json: ${{ secrets.SECRET_KEY }}
 
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
@@ -62,8 +62,8 @@ jobs:
 
       - name: Train and save model
         env:
-          GCS_BUCKET_NAME: ${{ secrets.GCS_BUCKET_NAME }}
-          VERSION_FILE_NAME: ${{ secrets.VERSION_FILE_NAME }}
+          GCS_BUCKET_NAME: ${{ secrets.BUCKET }}
+          VERSION_FILE_NAME: ${{ secrets.MODEL_VERSION }}
         run: |
           python src/train_and_save_model.py > output.txt
           echo "MODEL_VERSION=$(grep 'MODEL_VERSION_OUTPUT:' output.txt | cut -d' ' -f2)" >> $GITHUB_ENV
