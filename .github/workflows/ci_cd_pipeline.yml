@@ -16,9 +16,7 @@ env:
 jobs:
   build_test_and_deploy:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: \
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
