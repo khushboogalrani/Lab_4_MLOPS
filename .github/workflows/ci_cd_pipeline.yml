@@ -11,7 +11,7 @@ on:
 
 env:
   REGION: us
-  REPOSITORY_NAME: github-gcp-lab
+  REPOSITORY_NAME: my-repo
 
 jobs:
   build_test_and_deploy:
